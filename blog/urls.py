@@ -19,11 +19,17 @@ from django.urls import path, include
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+from blogs import views as BlogViews
+
 
 urlpatterns = [
+    path("admin/", admin.site.urls),
     path("", views.home, name="home"),
     path("blog/",include('blogs.urls')),
     path("category/",include('blogs.urls')),
-    path("admin/", admin.site.urls),
+    path('social/', include('blogs.urls')),
+    path('blogs/search/',BlogViews.search,name="search"),
+    path('<slug:slug>/',BlogViews.blog_view, name="blog_view"),
+    
     
 ] + static(settings.MEDIA_URL,document_root= settings.MEDIA_ROOT)

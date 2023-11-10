@@ -14,8 +14,16 @@
 <body>
   <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
-      <div class="col-8 pt-1">
+      <div class="col-4 pt-1">
         <a class="blog-header-logo text-dark" href="/">Django Blog</a>
+      </div>
+      <div class="col-4">
+        <form action="{% url 'search' %}" method="GET">
+          <div class="input-group">
+            <input class="form-control" type="text" name="keyword" value="{{ keyword }}" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+            <button type="submit" class="btn btn-warning" id="button-search" type="button">Go!</button>
+        </div>
+        </form>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
         <a class="btn btn-sm btn-warning" href="#">Login</a> &nbsp;
@@ -35,6 +43,16 @@
     {% block content %}
     
     {% endblock content %}
+    {% comment %} <aside class="col-md-4 blog-sidebar">
+    <div class="p-3">
+      <h4 class="font-italic">Follow Us</h4>
+      {% for link in links %}
+      <ol class="list-unstyled">
+        <li><a href="#">{{ link.site_name }}</a></li>
+      </ol>
+      {% endfor %}
+    </div>
+  </aside> {% endcomment %}
     <footer class="blog-footer">
       <p>Django blog built with � by <a href="#">Harish Mani</a></p>
       </footer>

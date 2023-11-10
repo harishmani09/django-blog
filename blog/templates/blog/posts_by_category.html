@@ -44,7 +44,7 @@
   </div>
   {% endif %}
 {% endfor %}
-</div> {% endcomment %}
+</div>  {% endcomment %}
 
 <!--Recent Articles-->
 <h3 class="text-uppercase text-warning" style="letter-spacing:2px;">Category - {{category.category_name}}</h3>
@@ -55,7 +55,7 @@
     {% if cat_posts %}
       {% for post in cat_posts %}
       <div class="blog-post">
-        <h2 class="blog-post-title">{{ post.title }}</h2>
+        <h2 class="blog-post-title"><a href="{% url 'blog_view' post.slug %}">{{ post.title }}</a></h2>
         <p class="blog-post-meta">{{ post.updated_at|timesince }} ago <a href="#">{{ post.author }}</a></p>
 
         <p>{{post.short_description | truncatewords:20 }}</p>
