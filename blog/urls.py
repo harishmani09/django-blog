@@ -29,6 +29,9 @@ urlpatterns = [
     path("category/",include('blogs.urls')),
     path('social/', include('blogs.urls')),
     path('blogs/search/',BlogViews.search,name="search"),
+    path('register/',views.register, name="register"),
+    path('login/',views.login, name="login"),
+    path('logout/',views.logout, name="logout"),
     path('<slug:slug>/',BlogViews.blog_view, name="blog_view"),
     
     
