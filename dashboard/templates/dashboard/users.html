@@ -1,0 +1,55 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+<div class="container row">
+{% include 'dashboard/sidebar.html' %}
+
+
+<div class="col-md-9">
+  {% if perms.auth.view_user %}
+    <h2 class="text-center">All Users</h2>
+    <a href="{% url 'add_users' %}" class="text-light btn btn-dark float-right">Add User</a>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>User Name</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Staff</th>
+            <th>Active</th>
+            <th>Super User</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+          <tr>
+            <th>{{forloop.counter}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.first_name}} &nbsp; {{user.first_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{% if user.is_staff %}<i class="fa fa-check text-success"></i>{% else %} <i class="fa fa-times text-danger"></i> {% endif %}</td>
+            <td>{% if user.is_active %}<i class="fa fa-check text-success"></i>{% else %} <i class="fa fa-times text-danger"></i> {% endif %}</td>
+            <td>{% if user.is_superuser %}<i class="fa fa-check text-success"></i>{% else %} <i class="fa fa-times text-danger"></i> {% endif %}</td>
+            <td>
+                <a href="{% url 'edit_users' user.id %}"><i class="fa fa-edit text-success"></i></a>
+                &nbsp;
+                <a href="{% url 'delete_users' user.id %}"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+          
+          {% endfor %}
+          {% else %}
+          <h5>you don't have permission to visit this pagae</h5>
+        </tbody>
+      </table>
+    
+      {% endif %}
+</div>
+
+
+</div>
+
+{% endblock content %}

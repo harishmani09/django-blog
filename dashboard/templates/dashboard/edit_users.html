@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container row">
+{% include 'dashboard/sidebar.html' %}
+
+
+<div class="col-md-9">
+    <h2>Edit Users</h2>
+{% if perms.auth.edit_user %}
+<form action="{% url 'edit_users' user.id %}" method='POST'>
+    {% csrf_token %}
+    {{ form | crispy }}
+<button type="submit" class="btn btn-warning">Submit</button>
+{% endif %}
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+{% endblock content %}
