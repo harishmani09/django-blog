@@ -35,25 +35,18 @@ class Blog(models.Model):
 
     def __str__(self) -> str:
         return self.title
-
-    class Meta:
-        pass
-
-
-# class Social(models.Model):
-#     site_name = models.CharField(max_length=100,null=True)
-#     link = models.URLField(max_length=100, unique=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-#     def __str__(self) -> str:
-#         return self.site_name
-
-# class About(models.Model):
-#     about_heading = models.CharField(max_length=100)
-#     about_description = models.TextField(max_length=2000)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
     
-#     def __str__(self) -> str:
-#         return self.about_heading
+    
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
+    comment = models.TextField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self) -> str:
+        return self.comment
+
+
+    
